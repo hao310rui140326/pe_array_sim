@@ -1,0 +1,31 @@
+This directory contains some code that generates parameterizations of the PE
+array which try to achieve either some specific resource usage (for example, 80% of
+the ALMs on the chip and 100% of the DSPs and M20Ks) or you can compile a
+specific architecture. If generating specific resource usage you can then generate
+a series of CSV files which contain the estimated area, number of PEs, and estimated
+TOPS for each parameterization. This allows different modes to be easily compared, identifying
+ which one would give the best performance in a specific chip area.
+
+To generate the CSV files, run this command:
+
+$ make csv
+
+Until quartus projects are generated and built, the CSV files will only contain
+area estimates. To generate quartus projects, run this command:
+
+$ make projects
+
+To generate the quartus projects for specific architectures use:
+
+$ make arch
+
+Once the quartus projects are generated, each one should be built in Quartus by
+running the build.sh script in each quartus project directory. The script
+run_on_farm.sh can be used to help automate this process on an ARC farm.
+
+If the quartus projects were generated and built by the `projects' flow, you can
+run "make csv" to generate new CSV files which contain both the area estimates
+along with the actual data collected from the quartus projects.
+
+To control which CSV files and quartus projects are generated and the
+configuration options used, modify the main.cpp file.

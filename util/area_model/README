@@ -1,0 +1,26 @@
+This direction contains code that generates quartus projects of many small PE
+arrays, in order to have enough data to generate a model in
+pe_arary_area_model.h.
+
+To generate the quartus projects, run this command:
+
+$ make projects
+
+Once the quartus projects are generated, each one should be built in Quartus by
+running the build.sh script in each quartus project directory. The script
+run_on_farm.sh can be used to help automate this process on an ARC farm.
+
+Once the quartus projects have been built, parse the data and generate a new
+pe_array_area_model.h by running this command:
+
+$ make model
+
+The new area model header will be generated in the build directory. To use it,
+move the new header into the inc directory and replace the existing header.
+Once this is done, you can do a sanity check to compare the area model in the
+header to the quartus projects once more:
+
+$ make check
+
+To control the corners used when building the area model, modify the main.cpp
+file.

@@ -1,0 +1,25 @@
+This directory contains the modelsim simulation test for the PE array. It runs
+a test which ensures that the Verilog implementation of the PE array matches
+the implementation in pe_array_model.h by sending random numbers through both
+and checking that the outputs match exactly.
+
+To compile and run all of the tests, run this command:
+
+  make run
+
+If you run all of the tests, it will probably take a few hours. If you just
+want to run one of the tests, run this command:
+
+  make run TEST=<test name or test number>
+
+You can pass either a test name or a test number. For example, both of these
+will work:
+
+  make run TEST=12
+  make run TEST=fe5_fi5_nr2_nc1_np2_nd1_nfe1_nfi2_ram512_dot4_nalm0_a1_s0
+
+Alternatively, if you would rather use the makefile just to compile the code
+and want to run the resulting test binary yourself, then use these commands:
+
+  make
+  cd build && ./test_runner <test name or test number>

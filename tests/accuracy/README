@@ -1,0 +1,45 @@
+This directory contains the accuracy test for the PE array. It runs a test
+which compares the implementation of the dot product and accumulator from
+pe_array_model.h to a reference implementation contained in the test. The
+reference implementation just uses a native FP32 value (float) to represent the
+accumulator, so the output of the reference does not always match exactly the
+output of the model down to the last bit.
+
+To accommodate this, the test is set up to run many tests with random numbers,
+and for each test, the difference between the model and the reference is output
+into a file called accuracy_results.txt. This one file contains every diff for
+every test for every dot_product/accumulator configuration. A reference copy of
+this file is committed into the source code as
+accuracy_results.reference.txt.gz. The test passes if the generated
+accuracy_results.txt matches the reference accuracy_results exactly.
+
+Whenever a change is made to the dot product/accumulator model that would
+change the output, the accuracy_results.reference.txt.gz file needs to be
+updated. To do this, just run the test once and let it fail in order to
+generate the accuracy_results.txt. Then, inspect the
+accuracy_results.summary.txt to see if the overall differences between the
+model and the reference implementation are acceptable. You can also check
+accuracy_results.sorted.txt, which has the same contents as
+accuracy_results.txt except the tests are sorted by the magnitude of the diff.
+This way, you can locate the worst cases easily in order to debug them. Once
+you have confirmed the new diffs are acceptable, you can copy
+accuracy_results.txt to accuracy_results.reference.txt.gz so that the test will
+pass in the future.
+
+To compile and run all of the accuracy tests, run this command:
+
+  make run
+
+If you just want to run one of the tests, run this command:
+
+  make run TEST=<test number>
+
+The test number is printed in the accuracy_results.txt as the first column.
+Therefore, if you see a test with a big diff in that file, you can use the test
+number to run just that one test.
+
+Alternatively, if you would rather use the makefile just to compile the code
+and want to run the resulting test binary yourself, then use these commands:
+
+  make
+  cd build && ./test_runner <test number>
