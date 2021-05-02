@@ -451,8 +451,11 @@ bool run_vsim(pe_array_cfg_t* cfg, const std::string& test_name) {
     filelist_file << "../../../tb/altera_lnsim.sv" << "\n";
     filelist_file << "../../../tb/twentynm_atoms.v" << "\n";
     filelist_file << "../../../tb/fourteennm_atoms.sv" << "\n";
-    filelist_file << "../../../tb/fourteennm_atoms_ncrypt.sv" << "\n";
-  
+    //filelist_file << "../../../tb/fourteennm_atoms_ncrypt.sv" << "\n";
+ 
+    if (cfg->device_a10)  filelist_file << "../../../tb/twentynm_atoms_ncrypt.v" << "\n";
+    if (cfg->device_s10)  filelist_file << "../../../tb/fourteennm_atoms_ncrypt.sv" << "\n";
+
   for (const std::string& filename : pe_array_files) {
     //do_file << "vlog -O0 ../../../../rtl/" << filename << "\n";
     do_file << "vlog ";
