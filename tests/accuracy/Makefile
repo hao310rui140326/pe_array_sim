@@ -15,10 +15,11 @@ OBJS := $(patsubst %.cpp,$(BUILD_DIR)/%.o,$(SRCS))
 CPPFLAGS += -I ../../inc
 
 # use C++11
-CPPFLAGS += -std=c++11
+CPPFLAGS += -std=c++11 -g
 
 # configure warnings and errors
-CPPFLAGS += -pedantic-errors -Wall -Wno-unused-function -Wno-unused-variable -Werror
+##CPPFLAGS += -pedantic-errors -Wall -Wno-unused-function -Wno-unused-variable -Werror
+CPPFLAGS += -pedantic-errors -Wall -Wno-unused-function -Wno-unused-variable 
 
 .PHONY: all
 all: $(BUILD_DIR)/$(OUTPUT) $(BUILD_DIR)/$(REFERENCE)
