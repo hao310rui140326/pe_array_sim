@@ -17,7 +17,7 @@
 // notice or any other notice embedded in Materials by Intel or Intel's
 // suppliers or licensors in any way.
 
-#include "pe_array.h"
+#include "../../inc/pe_array.h"
 
 #include <cstdlib>
 #include <cstring>
@@ -636,6 +636,8 @@ int main(int argc, char** argv) {
     std::ostringstream arc_cmd;
     arc_cmd << "arc submit --local --test name=pe_array_tests -- ./test_runner "
       "launch-arc-subjobs " << arc_group << " " << arc_priority;
+    std::cout << "* Executing cmd is  " << arc_cmd.str().c_str();
+
     int ret = system(arc_cmd.str().c_str());
     if (ret != 0) {
       std::cerr << "Error: arc submit returned error code " << ret << "\n";
